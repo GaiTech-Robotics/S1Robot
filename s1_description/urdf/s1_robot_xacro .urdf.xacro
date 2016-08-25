@@ -1,0 +1,44 @@
+<?xml version="1.0"?>  
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"  
+         xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"  
+         xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"  
+	 xmlns:xacro="http://ros.org.wiki/xacro"
+name="s1">  
+<!--          xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+-->
+<xacro:include filename="$(find s1_description)/urdf/s1_body.urdf.xacro"/>
+<xacro:include filename="$(find s1_description)/urdf/s1_robot_hardware.xacro" />
+<xacro:property name="base_length" value="0.005" />
+<xacro:property name="base_radius" value=".125" />  
+<xacro:property name="top_length" value="0.005" />
+<xacro:property name="top_radius" value="0.125" />  
+<xacro:property name="body_pos" value="0 0 0.0525" /> 
+<xacro:property name="wheel_radius" value="0.0325" />  
+<xacro:property name="wheel_length" value="0.027" />
+<xacro:property name="middle_left_front_radius" value="0.006"/>
+<xacro:property name="middle_left_front_length" value="0.045"/>
+<xacro:property name="middle_left_rear_radius" value="0.006"/>
+<xacro:property name="middle_left_rear_length" value="0.045"/>
+<xacro:property name="middle_right_front_radius" value="0.006"/>
+<xacro:property name="middle_right_front_length" value="0.045"/>
+<xacro:property name="middle_right_rear_radius" value="0.006"/>
+<xacro:property name="middle_right_rear_length" value="0.045"/>
+
+<xacro:property name="wheel_left_pos" value="-0.008 0.0975 -0.02" />
+<xacro:property name="wheel_right_pos" value="-0.008 -0.0975  -0.02" />
+
+<xacro:property name="middle_left_front_pos_x" value="0.08" />
+<xacro:property name="middle_left_front_pos_y" value="0.08" />
+
+<xacro:property name="middle_left_rear_pos_x" value="-0.08" />
+<xacro:property name="middle_left_rear_pos_y" value="0.08" />
+
+<xacro:property name="middle_right_front_pos_x" value="0.08" />
+<xacro:property name="middle_right_front_pos_y" value="-0.08" />
+
+<xacro:property name="middle_right_rear_pos_x" value="-0.08" />
+<xacro:property name="middle_right_rear_pos_y" value="-0.08" />
+<xacro:property name="middle_common_y" value="0.08"  />
+<xacro:property name="middle_common_z" value="0.0225" />
+<s1_body/>
+</robot>  
