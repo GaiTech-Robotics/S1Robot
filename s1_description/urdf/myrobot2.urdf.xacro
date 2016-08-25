@@ -1,0 +1,139 @@
+<?xml version="1.0"?>  
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"  
+         xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"  
+         xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"  
+	 xmlns:xacro="http://ros.org.wiki/xacro"
+name="myrobot2">  
+
+<xacro:property name="base_length" value="0.005" />
+<xacro:property name="base_radius" value=".125" />  
+<xacro:property name="top_length" value="0.005" />
+<xacro:property name="top_radius" value="0.125" />  
+<xacro:property name="body_pos" value="0 0 0.0525" /> 
+<xacro:property name="wheel_radius" value="0.0325" />  
+<xacro:property name="wheel_length" value="0.027" />
+<xacro:property name="middle_left_front_radius" value="0.006"/>
+<xacro:property name="middle_left_front_length" value="0.045"/>
+<xacro:property name="middle_left_rear_radius" value="0.006"/>
+<xacro:property name="middle_left_rear_length" value="0.045"/>
+<xacro:property name="middle_right_front_radius" value="0.006"/>
+<xacro:property name="middle_right_front_length" value="0.045"/>
+<xacro:property name="middle_right_rear_radius" value="0.006"/>
+<xacro:property name="middle_right_rear_length" value="0.045"/>
+
+<xacro:property name="wheel_left_pos" value="-0.008 0.0975 -0.02" />
+<xacro:property name="wheel_right_pos" value="-0.008 -0.0975  -0.02" />
+
+<xacro:property name="middle_left_front_pos_x" value="0.08" />
+<xacro:property name="middle_left_front_pos_y" value="0.08" />
+
+<xacro:property name="middle_left_rear_pos_x" value="-0.08" />
+<xacro:property name="middle_left_rear_pos_y" value="0.08" />
+
+<xacro:property name="middle_right_front_pos_x" value="0.08" />
+<xacro:property name="middle_right_front_pos_y" value="-0.08" />
+
+<xacro:property name="middle_right_rear_pos_x" value="-0.08" />
+<xacro:property name="middle_right_rear_pos_y" value="-0.08" />
+<xacro:property name="middle_common_y" value="0.08"  />
+<xacro:property name="middle_common_z" value="0.0225" />
+
+<macro name="wheel" params="wheelname position">  
+    <link name="${wheelname}" type="continuous">  
+      <visual>  
+        <geometry>  
+          <cylinder length="${wheel_length}" radius="${wheel_radius}"/>  
+        </geometry>  
+         <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+    </link>    
+    <joint name="joint_base_${wheelname}" type="fixed">    
+      <origin rpy="1.57075 1.57075 0" xyz="${position}"/>  
+      <parent link="base_link"/>  
+      <child link="${wheelname}"/>  
+      <axis xyz="0 1 0" />
+    </joint>  
+</macro> 
+
+<macro name="middle" params="parent posName x_pos y_pos z_pos radius length">
+  <joint name="middle_${posName}_pos" type="fixed">
+    <origin xyz="${x_pos} ${y_pos} ${z_pos}" rpy="0 0 0"/>
+    <parent link="${parent}"/>
+    <child link="middle_${posName}_pos" />
+  </joint>
+  <link name="middle_${posName}_pos">
+    <visual>
+      <geometry>
+        <cylinder length="${length}"  radius="${radius}"/>
+      </geometry>
+      <material name="wihte">  
+        <color rgba="220 220 220 1"/>  
+      </material>  
+    </visual>
+  </link>
+</macro> 
+<!-- base foot print -->
+  <link name="base_footprint">
+    <visual>
+      <geometry>
+        <box size="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Green">
+        <color rgba="0 255 0 1" />
+      </material>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+  </link>      
+
+
+  <joint name="base_top" type="fixed">
+    <parent link="base_link" />
+    <child link="top_link" />
+    <origin xyz="0 0 0.045" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <xacro:wheel wheelname="wheel_left_pos" position="${wheel_left_pos}"/>  
+  <xacro:wheel wheelname="wheel_right_pos" position="${wheel_right_pos}"/>  
+
+<xacro:middle parent="base_link" posName="left_front" x_pos="${middle_left_front_pos_x}" y_pos="${middle_left_front_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_front_radius}" length="${middle_left_front_length}"/>
+
+<xacro:middle parent="base_link" posName="left_rear" x_pos="${middle_left_rear_pos_x}" y_pos="${middle_left_rear_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_rear_radius}" length="${middle_left_rear_length}"/>
+
+<xacro:middle parent="base_link" posName="right_front" x_pos="${middle_right_front_pos_x}" y_pos="${middle_right_front_pos_y}" z_pos="${middle_common_z}" radius="${middle_right_front_radius}" length="${middle_right_front_length}"/>
+<xacro:middle parent="base_link" posName="right_rear" x_pos="${middle_right_rear_pos_x}" y_pos="${middle_right_rear_pos_y}" z_pos="${middle_common_z}" radius="${middle_right_rear_radius}" length="${middle_right_rear_length}"/>
+
+<!-- base link -->
+  <link name="base_link">  
+    <visual>  
+       <origin rpy="0 0 0" xyz="0 0 0"/>  
+  
+       <geometry>  
+         <cylinder radius="${base_radius}" length="${base_length}"/>  
+       </geometry>  
+       <material name="white">  
+         <color rgba="0.8 0.4784 0.16078 1"/>  
+       </material>  
+    </visual>  
+  </link> 
+
+
+<joint name="base_footprint_joint" type="fixed">     
+  <origin rpy="0 0 0" xyz="${body_pos}"/>  
+  <parent link="base_footprint" />
+  <child link="base_link" />
+</joint>
+
+  <!--top link -->
+  <link name="top_link">
+    <visual>
+      <geometry>
+        <cylinder length="${top_length}" radius="${top_radius}"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0.4784 0.16078 1" />
+      </material>
+    </visual>
+  </link>
+</robot>  
