@@ -1,0 +1,9 @@
+<!--
+  Robot description only (used in private and paired master).
+ -->
+<launch>
+
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find s1_description)/urdf/s1_robot_xacro.urdf.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file)" />
+
+</launch>
