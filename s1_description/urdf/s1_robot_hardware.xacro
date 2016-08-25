@@ -1,0 +1,41 @@
+<?xml version="1.0"?>  
+<robot>
+
+<macro name="wheel" params="wheelname position">  
+    <link name="${wheelname}" >  
+      <visual>  
+        <geometry>  
+          <cylinder length="${wheel_length}" radius="${wheel_radius}"/>  
+        </geometry>  
+         <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+    </link>    
+    <joint name="joint_base_${wheelname}" type="continuous">    
+      <origin rpy="1.57075 1.57075 0" xyz="${position}"/>  
+      <parent link="base_link"/>  
+      <child link="${wheelname}"/>  
+      <axis xyz="0 1 0" />
+    </joint>  
+</macro> 
+
+<macro name="middle" params="parent posName x_pos y_pos z_pos radius length">
+  <joint name="middle_${posName}_pos" type="fixed">
+    <origin xyz="${x_pos} ${y_pos} ${z_pos}" rpy="0 0 0"/>
+    <parent link="${parent}"/>
+    <child link="middle_${posName}_pos" />
+  </joint>
+  <link name="middle_${posName}_pos">
+    <visual>
+      <geometry>
+        <cylinder length="${length}"  radius="${radius}"/>
+      </geometry>
+      <material name="wihte">  
+        <color rgba="220 220 220 1"/>  
+      </material>  
+    </visual>
+  </link>
+</macro> 
+
+</robot> 
