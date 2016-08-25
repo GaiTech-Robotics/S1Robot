@@ -1,0 +1,45 @@
+<?xml version="1.0"?>  
+<robot name="s1_gazebo"
+	 xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"  
+         xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"  
+         xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"  
+	 xmlns:xacro="http://ros.org.wiki/xacro">  
+<!--          xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+-->
+
+<xacro:macro name="s1_sim_create">
+  <gazebo>
+    <controller:gazebo_ros_create name="create_controller" plugin="libgazebo_ros_create.so">
+      <alwaysOn>true</alwaysOn>
+      <node_namespace>s1_node</node_namespace>
+      <left_wheel_joint>left_wheel_joint</left_wheel_joint>
+      <right_wheel_joint>right_wheel_joint</right_wheel_joint>
+      <wheel_separation>.260</wheel_separation>
+      <wheel_diameter>0.066</wheel_diameter>
+      <base_geom>base_link_geom_base_link</base_geom>
+      <updateRate>40</updateRate>
+      <torque>1.0</torque>
+    </controller:gazebo_ros_create>
+  </gazebo>
+</xacro:macro>
+
+
+<xacro:macro name="s1_sim_wall_sensors">
+  <gazebo reference="left_wheel_link">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <kp value="100000000.0"/>
+    <kd value="10000.0"/>
+    <fdir value="1 0 0"/>
+  </gazebo>
+
+  <gazebo reference="right_wheel_link">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <kp value="100000000.0"/>
+    <kd value="10000.0"/>
+    <fdir value="1 0 0"/>
+  </gazebo>
+</xacro:macro>
+
+</robot>  
