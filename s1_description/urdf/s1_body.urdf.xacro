@@ -1,0 +1,144 @@
+<?xml version="1.0"?>  
+<robot  name="s1_body" xmlns:xacro="http://ros.org.wiki/xacro">  
+
+ <!-- <xacro:include filename="${find s1_description)/urdf/gazebo.urdf.xacro" /> -->
+
+  <xacro:macro name="s1_body">
+    <material name="Green">
+      <color rgba="0.0 0.8 0.0 1.0" />
+    </material>
+
+<!-- base foot print -->
+  <link name="base_footprint">
+    <visual>
+      <geometry>
+        <box size="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Green">
+        <color rgba="0 255 0 1" />
+      </material>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+  </link>      
+
+
+  <joint name="base_top" type="fixed">
+    <parent link="base_link" />
+    <child link="top_link" />
+    <origin xyz="0 0 0.045" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+<!-- <xacro:wheel parent="base_link" wheelname="left" position="${wheel_left_pos}"/>  
+<xacro:wheel parent="base_link" wheelname="right" position="${wheel_right_pos}"/>  
+-->
+  <link name="left_wheel_link" >  
+    <visual>  
+      <origin xyz="${wheel_left_pos}" rpy="0 1.5707 1.5707" /> 
+        <geometry>  
+          <mesh filename="package://s1_description/meshes/wheel.dae"/>
+        </geometry>  
+         <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+
+    <inertial> 
+      <origin xyz="${wheel_left_pos}"/> 
+      <mass value="0.01" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+
+    <collision> 
+      <origin xyz="${wheel_left_pos}" rpy="0 1.5707 1.5707" /> 
+      <geometry>
+        <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+      </geometry>
+    </collision>
+
+    </link>    
+
+    <joint name="base_left_wheel_joint" type="continuous">    
+      <origin rpy=" 0 0 0" xyz="${wheel_left_pos}"/>  
+      <parent link="base_link"/>  
+      <child link="left_wheel_link"/>  
+      <axis xyz="0 1 0" />
+    </joint>
+
+  <link name="right_wheel_link" >  
+    <visual>  
+      <origin xyz="${wheel_right_pos}" rpy="0 1.5707 1.5707" /> 
+        <geometry>  
+          <mesh filename="package://s1_description/meshes/wheel.dae"/>
+        </geometry>  
+         <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+
+    <inertial> 
+      <origin xyz="${wheel_right_pos}"/> 
+      <mass value="0.01" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+
+    <collision> 
+      <origin xyz="${wheel_right_pos}" rpy="0 1.5707 1.5707" /> 
+      <geometry>
+        <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+      </geometry>
+    </collision>
+
+    </link>    
+
+    <joint name="base_right_wheel_joint" type="continuous">    
+      <origin rpy=" 0 0 0" xyz="${wheel_right_pos}"/>  
+      <parent link="base_link"/>  
+      <child link="right_wheel_link"/>  
+      <axis xyz="0 1 0" />
+    </joint>  
+<xacro:middle parent="base_link" posName="left_front" x_pos="${middle_left_front_pos_x}" y_pos="${middle_left_front_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_front_radius}" length="${middle_left_front_length}"/>
+
+<xacro:middle parent="base_link" posName="left_rear" x_pos="${middle_left_rear_pos_x}" y_pos="${middle_left_rear_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_rear_radius}" length="${middle_left_rear_length}"/>
+
+<xacro:middle parent="base_link" posName="right_front" x_pos="${middle_right_front_pos_x}" y_pos="${middle_right_front_pos_y}" z_pos="${middle_common_z}" radius="${middle_right_front_radius}" length="${middle_right_front_length}"/>
+<xacro:middle parent="base_link" posName="right_rear" x_pos="${middle_right_rear_pos_x}" y_pos="${middle_right_rear_pos_y}" z_pos="${middle_common_z}" radius="${middle_right_rear_radius}" length="${middle_right_rear_length}"/>
+
+<!-- base link -->
+  <link name="base_link">  
+    <visual>  
+       <origin rpy="0 0 0" xyz="0 0 0"/>  
+  
+       <geometry>  
+         <cylinder radius="${base_radius}" length="${base_length}"/>  
+       </geometry>  
+       <material name="white">  
+         <color rgba="0.8 0.4784 0.16078 1"/>  
+       </material>  
+    </visual>  
+  </link> 
+
+
+<joint name="base_footprint_joint" type="fixed">     
+  <origin rpy="0 0 0" xyz="${body_pos}"/>  
+  <parent link="base_footprint" />
+  <child link="base_link" />
+</joint>
+
+  <!--top link -->
+  <link name="top_link">
+    <visual>
+      <geometry>
+        <cylinder length="${top_length}" radius="${top_radius}"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0.4784 0.16078 1" />
+      </material>
+    </visual>
+  </link>
+<!--
+  <s1_sim_create/>
+  <s1_sim_wall_sensors/> -->
+  </xacro:macro>
+</robot>
