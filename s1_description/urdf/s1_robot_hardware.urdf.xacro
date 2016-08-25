@@ -1,0 +1,58 @@
+<?xml version="1.0"?>  
+<robot name="s1_robot_hardware" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<macro name="wheel" params="parent wheelname position ">  
+    <link name="${wheelname}_wheel_link" >  
+      <visual>  
+        <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
+        <geometry>  
+          <mesh filename="package://kobuki_description/meshes/wheel.dae"/>
+        </geometry>  
+         <material name="black">  
+          <color rgba="0 0 0 1"/>  
+        </material>  
+      </visual>  
+
+    <inertial> 
+      <origin xyz="0 0 0"/> 
+      <mass value="0.01" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+
+    <collision> 
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
+      <geometry>
+        <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+      </geometry>
+    </collision>
+
+    </link>    
+
+    <joint name="base_${wheelname}_wheel_joint" type="continuous">    
+      <origin rpy=" 0 0 0" xyz="${position}"/>  
+      <parent link="${parent}"/>  
+      <child link="${wheelname}_wheel_link"/>  
+      <axis xyz="0 1 0" />
+    </joint>  
+</macro> 
+
+<macro name="middle" params="parent posName x_pos y_pos z_pos radius length">
+  <joint name="middle_${posName}_pos" type="fixed">
+    <origin xyz="${x_pos} ${y_pos} ${z_pos}" rpy="0 0 0"/>
+    <parent link="${parent}"/>
+    <child link="middle_${posName}_pos" />
+  </joint>
+  <link name="middle_${posName}_pos">
+    <visual>
+      <geometry>
+        <cylinder length="${length}"  radius="${radius}"/>
+      </geometry>
+      <material name="wihte">  
+        <color rgba="220 220 220 1"/>  
+      </material>  
+    </visual>
+  </link>
+</macro> 
+
+</robot> 
