@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<robot name="myrobot2">
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.002" radius="0.10"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0.4784 0.16078 1" />
+      </material>
+    </visual>
+  </link>
+  
+  <!--wheel left -->
+  <link name="wheel_left_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57075 1.57075 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.0325"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="wheel_left" type="continuous">
+    <origin xyz="0 0.09 -0.016" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="wheel_left_link" />
+    <axis xyz="0 1 0" />
+  </joint>
+   <!--wheel right -->
+  <link name="wheel_right_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57075 1.57075 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.0325"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="wheel_right" type="continuous">
+    <origin xyz="0 -0.09 -0.016" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="wheel_right_link" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+   <!--top link -->
+  <link name="top_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.002" radius="0.095"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0.4784 0.16078 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="base_top" type="fixed">
+    <origin xyz="0 0 0.05" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="top_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+</robot>
+
