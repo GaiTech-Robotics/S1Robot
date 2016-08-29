@@ -33,7 +33,7 @@
 -->
   <link name="left_wheel_link" >  
     <visual>  
-      <origin xyz="${wheel_left_pos}" rpy="0 1.5707 1.5707" /> 
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
         <geometry>  
           <mesh filename="package://s1_description/meshes/wheel.dae"/>
         </geometry>  
@@ -43,14 +43,14 @@
       </visual>  
 
     <inertial> 
-      <origin xyz="${wheel_left_pos}"/> 
+      <origin xyz="0 0 0"/> 
       <mass value="0.01" />
       <inertia ixx="0.001" ixy="0.0" ixz="0.0"
         iyy="0.001" iyz="0.0" izz="0.001" />
     </inertial>
 
     <collision> 
-      <origin xyz="${wheel_left_pos}" rpy="0 1.5707 1.5707" /> 
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
       <geometry>
         <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
       </geometry>
@@ -67,7 +67,7 @@
 
   <link name="right_wheel_link" >  
     <visual>  
-      <origin xyz="${wheel_right_pos}" rpy="0 1.5707 1.5707" /> 
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
         <geometry>  
           <mesh filename="package://s1_description/meshes/wheel.dae"/>
         </geometry>  
@@ -77,14 +77,14 @@
       </visual>  
 
     <inertial> 
-      <origin xyz="${wheel_right_pos}"/> 
+      <origin xyz="0 0 0 "/> 
       <mass value="0.01" />
       <inertia ixx="0.001" ixy="0.0" ixz="0.0"
         iyy="0.001" iyz="0.0" izz="0.001" />
     </inertial>
 
     <collision> 
-      <origin xyz="${wheel_right_pos}" rpy="0 1.5707 1.5707" /> 
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707" /> 
       <geometry>
         <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
       </geometry>
@@ -98,6 +98,7 @@
       <child link="right_wheel_link"/>  
       <axis xyz="0 1 0" />
     </joint>  
+
 <xacro:middle parent="base_link" posName="left_front" x_pos="${middle_left_front_pos_x}" y_pos="${middle_left_front_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_front_radius}" length="${middle_left_front_length}"/>
 
 <xacro:middle parent="base_link" posName="left_rear" x_pos="${middle_left_rear_pos_x}" y_pos="${middle_left_rear_pos_y}" z_pos="${middle_common_z}" radius="${middle_left_rear_radius}" length="${middle_left_rear_length}"/>
