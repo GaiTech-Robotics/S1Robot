@@ -13,7 +13,7 @@
   <run_depend>s1_base_controller</run_depend>
   <run_depend>s1_bringup</run_depend>
   <run_depend>s1_description</run_depend>
-  <run_depend>s1_teleop</run_depend>
+  <run_depend>s1_teleop</run_depend> 
   <export>
     <metapackage/>
   </export>
