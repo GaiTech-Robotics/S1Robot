@@ -7,8 +7,8 @@
 	 xmlns:xacro="http://ros.org.wiki/xacro">  
 <!--          xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
 -->
-<xacro:include filename="$(find s1_description)/urdf/s1_body.urdf.xacro"/>
-<xacro:include filename="$(find s1_description)/urdf/fake_s1_robot_hardware.urdf.xacro" />
+<xacro:include filename="$(find s1_description)/urdf/fake_s1_body.urdf.xacro"/>
+<xacro:include filename="$(find s1_description)/urdf/s1_robot_hardware.urdf.xacro" />
 
 <xacro:property name="base_length" value="0.005" />
 <xacro:property name="base_radius" value=".125" />  
