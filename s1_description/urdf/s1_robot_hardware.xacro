@@ -1,20 +1,36 @@
 <?xml version="1.0"?>  
 <robot>
 
-<macro name="wheel" params="wheelname position">  
+<macro name="wheel" params="parent wheelname position">  
     <link name="${wheelname}" >  
-      <visual>  
+    <visual>  
+     <origin xyz="${position}" rpy="0 1.5707 1.5707" /> 
         <geometry>  
-          <cylinder length="${wheel_length}" radius="${wheel_radius}"/>  
+          <mesh filename="package://s1_description/meshes/wheel.dae"/>
         </geometry>  
          <material name="black">  
           <color rgba="0 0 0 1"/>  
         </material>  
       </visual>  
+
+    <inertial> 
+      <origin xyz="${position}"/> 
+      <mass value="0.01" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+
+    <collision> 
+      <origin xyz="${position}" rpy="0 1.5707 1.5707" /> 
+      <geometry>
+        <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+      </geometry>
+    </collision>
     </link>    
+
     <joint name="joint_base_${wheelname}" type="continuous">    
       <origin rpy="1.57075 1.57075 0" xyz="${position}"/>  
-      <parent link="base_link"/>  
+      <parent link="${parent}"/>  
       <child link="${wheelname}"/>  
       <axis xyz="0 1 0" />
     </joint>  
